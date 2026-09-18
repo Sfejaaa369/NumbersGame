@@ -1,9 +1,12 @@
-﻿namespace NumbersGame
+﻿using System.Threading.Channels;
+
+namespace NumbersGame
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("testttttt");
             //bool for being able to end while loop after 5 guess attempts
             //starting with true, gets changes to false later on if player decides to notplay again
             bool play = true;
