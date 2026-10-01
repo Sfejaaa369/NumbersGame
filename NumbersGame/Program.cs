@@ -138,6 +138,21 @@
             }
         }
 
+        //creating a separate method to calculate the difference between the user's guess and the random secret number
+        //I can then call on this method in my CheckGuess method
+        public static int CheckDifference(int guess, int secret)
+        {
+            if (guess > secret) //if they guessed too high, return the difference between their guess and the number
+            {
+                return guess - secret;
+            }
+            else //if they guessed too low, return the difference between the secreat number and their guess,
+                 //to avoid negative numbers
+            {
+                return secret - guess;
+            }
+        }
+
         public static void CheckGuess(int guess, int secret) 
         {
             //array with multiple text options about the guess being too high
@@ -158,23 +173,44 @@
                 "Trevligt att du gissar men det var för lågt. Försök igen."
                 };
 
+            int difference = CheckDifference(guess, secret);
 
             if (guess > secret) //if they guessed too high
             {
-                Random tooHighAnswer = new Random(); //create a new instance of random
-                int tooHighText = tooHighAnswer.Next(tooHigh.Length); //choose a random answer from the array
-                Console.WriteLine(tooHigh[tooHighText]); //write out the randomly chosen text from the array
-
-                //code that I had before adding an array for varied messages if the user guessed too high
+                if(difference == 1)
+                {
+                    Console.WriteLine("Vääääääääldigt nära. Försök igen!");
+                }
+                else if(difference > 1 && difference <=3)
+                {
+                    Console.WriteLine("Nära, men lite för högt! Försök igen.");
+                }
+                else
+                {
+                    Random tooHighAnswer = new Random(); //create a new instance of random
+                    int tooHighText = tooHighAnswer.Next(tooHigh.Length); //choose a random answer from the array
+                    Console.WriteLine(tooHigh[tooHighText]); //write out the randomly chosen text from the array
+                }
+                //code that I had before adding an array for varied messages if the user guessed too high:
                 //Console.WriteLine("Tyvärr,du gissade för högt!");
             }
             else if (guess < secret) //if they guessed too low
             {
-                Random tooLowAnswer = new Random(); //create a new instance of random
-                int tooLowText = tooLowAnswer.Next(tooLow.Length); //choose a random answer from the array
-                Console.WriteLine(tooLow[tooLowText]); //write out the randomly chosen text from the array
-
-                //code that I had before adding an array for varied messages if the user guessed too low
+                if(difference == 1)
+                {
+                    Console.WriteLine("Vääääääääldigt nära. Försök igen!");
+                }
+                else if (difference > 1 && difference <= 3)
+                {
+                    Console.WriteLine("Nära, men lite för lågt! Försök igen.");
+                }
+                else
+                {
+                    Random tooLowAnswer = new Random(); //create a new instance of random
+                    int tooLowText = tooLowAnswer.Next(tooLow.Length); //choose a random answer from the array
+                    Console.WriteLine(tooLow[tooLowText]); //write out the randomly chosen text from the array
+                }
+                //code that I had before adding an array for varied messages if the user guessed too low:
                 //Console.WriteLine("Tyvärr, du gissade för lågt!");
             }
             else //if they guessed exactly right
