@@ -140,13 +140,42 @@
 
         public static void CheckGuess(int guess, int secret) 
         {
+            //array with multiple text options about the guess being too high
+            string[] tooHigh = 
+                {"Det var för högt. Försök igen!", 
+                "Oops, det var för högt. Försök igen.", 
+                "Hoppsan, det var för högt. Gissa igen.", 
+                "Nope, för högt. Försök igen!", 
+                "Trevligt att du gissar men det var för högt. Försök igen." 
+                };
+
+            //array with multiple text options about the guess being too high
+            string[] tooLow = 
+                {"Det var för lågt. Försök igen!",
+                "Oops, det var för lågt. Försök igen.",
+                "Hoppsan, det var för lågt. Gissa igen.",
+                "Nope, för lågt. Försök igen!",
+                "Trevligt att du gissar men det var för lågt. Försök igen."
+                };
+
+
             if (guess > secret) //if they guessed too high
             {
-                Console.WriteLine("Tyvärr,du gissade för högt!");
+                Random tooHighAnswer = new Random(); //create a new instance of random
+                int tooHighText = tooHighAnswer.Next(tooHigh.Length); //choose a random answer from the array
+                Console.WriteLine(tooHigh[tooHighText]); //write out the randomly chosen text from the array
+
+                //code that I had before adding an array for varied messages if the user guessed too high
+                //Console.WriteLine("Tyvärr,du gissade för högt!");
             }
             else if (guess < secret) //if they guessed too low
             {
-                Console.WriteLine("Tyvärr, du gissade för lågt!");
+                Random tooLowAnswer = new Random(); //create a new instance of random
+                int tooLowText = tooLowAnswer.Next(tooLow.Length); //choose a random answer from the array
+                Console.WriteLine(tooLow[tooLowText]); //write out the randomly chosen text from the array
+
+                //code that I had before adding an array for varied messages if the user guessed too low
+                //Console.WriteLine("Tyvärr, du gissade för lågt!");
             }
             else //if they guessed exactly right
             {
