@@ -1,4 +1,6 @@
-﻿namespace NumbersGame
+﻿using System.ComponentModel.Design;
+
+namespace NumbersGame
 {
     internal class Program
     {
@@ -24,98 +26,102 @@
                 Console.WriteLine("Hej! Välj en nivå genom att skriva en siffra mellan 1 och 3:\n" +
                     "[1] Easy\n" +
                     "[2] Medium\n" +
-                    "[3] Difficult");
+                    "[3] Difficult\n");
 
                 //save user input and convert from string to int
-                try
+                if (int.TryParse(Console.ReadLine(), out int userLevel))
                 {
-                    int userLevel = int.Parse(Console.ReadLine());
-                
-                switch (userLevel)
-                {
-                    case 1: //code for the easy game: number 1-10, 5 tries
-                        Random randomCase1 = new Random();
-                        int secretNumberCase1 = randomCase1.Next(1, 11);
+                    switch (userLevel)
+                    {
+                        case 1: //code for the easy game: number 1-10, 5 tries
+                            Random randomCase1 = new Random();
+                            int secretNumberCase1 = randomCase1.Next(1, 11);
 
-                        Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 10. Kan du gissa vilket? Du får fem försök.");
+                            Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 10. Kan du gissa vilket? Du får fem försök.");
 
-                        for (int attempts = 1; attempts <= 5; attempts++)
-                        {
-                            int userNumber = int.Parse(Console.ReadLine());
-                            CheckGuess(userNumber, secretNumberCase1);
-
-                            //if they guessed the correct number, we end the loop
-                            if (userNumber == secretNumberCase1)
+                            for (int attempts = 1; attempts <= 5; attempts++)
                             {
-                                guessedCorrectly = true; //bool gets updated from false to true when user guesses the correct number
-                                break;
-                            }
-                        }
+                                int userNumber = int.Parse(Console.ReadLine());
+                                CheckGuess(userNumber, secretNumberCase1);
 
-                        //outside of the for loop, otherwise it always writes out this message
-                        if (guessedCorrectly == false) //if user didn't manage to guess correct number
-                        {
-                            Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!");
-                        }
+                                //if they guessed the correct number, we end the loop
+                                if (userNumber == secretNumberCase1)
+                                {
+                                    guessedCorrectly = true; //bool gets updated from false to true when user guesses the correct number
+                                    break;
+                                }
+                            }
+
+                            //outside of the for loop, otherwise it always writes out this message
+                            if (guessedCorrectly == false) //if user didn't manage to guess correct number
+                            {
+                                Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!\n");
+                            }
                             playedGame = true;
-                        break;
+                            break;
 
-                    case 2: //code for the medium game: 1-20, 5 tries
-                        Random randomCase2 = new Random();
-                        int secretNumberCase2 = randomCase2.Next(1, 21);
+                        case 2: //code for the medium game: 1-20, 5 tries
+                            Random randomCase2 = new Random();
+                            int secretNumberCase2 = randomCase2.Next(1, 21);
 
-                        Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 20. Kan du gissa vilket? Du får fem försök.");
+                            Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 20. Kan du gissa vilket? Du får fem försök.");
 
-                        for (int attempts = 1; attempts <= 5; attempts++)
-                        {
-                            int userNumber = int.Parse(Console.ReadLine());
-                            CheckGuess(userNumber, secretNumberCase2);
-
-                            if (userNumber == secretNumberCase2)
+                            for (int attempts = 1; attempts <= 5; attempts++)
                             {
-                                guessedCorrectly = true;
-                                break;
-                            }
-                        }
+                                int userNumber = int.Parse(Console.ReadLine());
+                                CheckGuess(userNumber, secretNumberCase2);
 
-                        if (guessedCorrectly == false) 
-                        {
-                            Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!");
-                        }
+                                if (userNumber == secretNumberCase2)
+                                {
+                                    guessedCorrectly = true;
+                                    break;
+                                }
+                            }
+
+                            if (guessedCorrectly == false)
+                            {
+                                Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!\n");
+                            }
 
                             playedGame = true;
-                        break;
+                            break;
 
-                    case 3: //code for the difficult game: 1-20, 3 tries
-                        Random randomCase3 = new Random();
-                        int secretNumberCase3 = randomCase3.Next(1, 21);
+                        case 3: //code for the difficult game: 1-20, 3 tries
+                            Random randomCase3 = new Random();
+                            int secretNumberCase3 = randomCase3.Next(1, 21);
 
-                        Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 20. Kan du gissa vilket? Du får tre försök.");
+                            Console.WriteLine("Välkommen! Jag tänker på ett nummer mellan 1 och 20. Kan du gissa vilket? Du får tre försök.");
 
-                        for (int attempts = 1; attempts <= 3; attempts++)
-                        {
-                            int userNumber = int.Parse(Console.ReadLine());
-                            CheckGuess(userNumber, secretNumberCase3);
-
-                            if (userNumber == secretNumberCase3)
+                            for (int attempts = 1; attempts <= 3; attempts++)
                             {
-                                guessedCorrectly = true;
-                                break;
-                            }
-                        }
+                                int userNumber = int.Parse(Console.ReadLine());
+                                CheckGuess(userNumber, secretNumberCase3);
 
-                        if (guessedCorrectly == false)
-                        {
-                            Console.WriteLine("Tyvärr, du lyckades inte gissa talet på tre försök!");
-                        }
+                                if (userNumber == secretNumberCase3)
+                                {
+                                    guessedCorrectly = true;
+                                    break;
+                                }
+                            }
+
+                            if (guessedCorrectly == false)
+                            {
+                                Console.WriteLine("Tyvärr, du lyckades inte gissa talet på tre försök!\n");
+                            }
                             playedGame = true;
 
-                        break;
+                            break;
 
                         default: //in case the user writes a number that's not between 1 and 3
-                            Console.WriteLine("Du måste skriva en siffra mellan 1 och 3!");
+                            Console.WriteLine("Du måste skriva en siffra mellan 1 och 3!\n");
                             break;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Du måste skriva en siffra!\n");
+                }
+                    
 
                     //keep this out of the switch cases since it applies to all cases
                     if (playedGame == true)
@@ -129,15 +135,9 @@
                             play = false;
                         }
                     }
-                
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Du måste skriva en siffra!");
                 }
             }
-        }
-
+     
         //creating a separate method to calculate the difference between the user's guess and the random secret number
         //I can then call on this method in my CheckGuess method
         public static int CheckDifference(int guess, int secret)
