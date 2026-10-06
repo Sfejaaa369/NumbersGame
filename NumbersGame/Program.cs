@@ -18,10 +18,6 @@ namespace NumbersGame
                 //bool has to be in while loop in case user wishes to play multiple times to ensure the "sorry you didn't magae to guess in x tries" gets shown
                 bool guessedCorrectly = false;
 
-                //bool to show if user played a game or not
-                //needed to ensure right info is shown when user writes another number than 1-3 when choosing level 
-                bool playedGame = false;
-
                 //ask user for which level they wish to play
                 Console.WriteLine("Hej! Välj en nivå genom att skriva en siffra mellan 1 och 3:\n" +
                     "[1] Easy\n" +
@@ -57,7 +53,6 @@ namespace NumbersGame
                             {
                                 Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!\n");
                             }
-                            playedGame = true;
                             break;
 
                         case 2: //code for the medium game: 1-20, 5 tries
@@ -82,8 +77,6 @@ namespace NumbersGame
                             {
                                 Console.WriteLine("Tyvärr, du lyckades inte gissa talet på fem försök!\n");
                             }
-
-                            playedGame = true;
                             break;
 
                         case 3: //code for the difficult game: 1-20, 3 tries
@@ -108,8 +101,6 @@ namespace NumbersGame
                             {
                                 Console.WriteLine("Tyvärr, du lyckades inte gissa talet på tre försök!\n");
                             }
-                            playedGame = true;
-
                             break;
 
                         default: //in case the user writes a number that's not between 1 and 3
@@ -123,9 +114,7 @@ namespace NumbersGame
                 }
                     
 
-                    //keep this out of the switch cases since it applies to all cases
-                    if (playedGame == true)
-                    {
+                    ////keep this out of the switch cases since it applies to all cases
                         Console.WriteLine("Vill du spela igen? Svara gärna med 'ja' eller 'nej':");
                         string userPlayAgain = Console.ReadLine();
 
@@ -136,7 +125,6 @@ namespace NumbersGame
                         }
                     }
                 }
-            }
      
         //creating a separate method to calculate the difference between the user's guess and the random secret number
         //I can then call on this method in my CheckGuess method
@@ -157,20 +145,20 @@ namespace NumbersGame
         {
             //array with multiple text options about the guess being too high
             string[] tooHigh = 
-                {"Det var för högt. Försök igen!", 
-                "Oops, det var för högt. Försök igen.", 
-                "Hoppsan, det var för högt. Gissa igen.", 
-                "Nope, för högt. Försök igen!", 
-                "Trevligt att du gissar men det var för högt. Försök igen." 
+                {"Det var för högt!", 
+                "Oops, det var för högt.", 
+                "Hoppsan, det var för högt.", 
+                "Nope, för högt.", 
+                "Trevligt att du gissar men det var för högt." 
                 };
 
             //array with multiple text options about the guess being too high
             string[] tooLow = 
-                {"Det var för lågt. Försök igen!",
-                "Oops, det var för lågt. Försök igen.",
-                "Hoppsan, det var för lågt. Gissa igen.",
-                "Nope, för lågt. Försök igen!",
-                "Trevligt att du gissar men det var för lågt. Försök igen."
+                {"Det var för lågt!",
+                "Oops, det var för lågt.",
+                "Hoppsan, det var för lågt.",
+                "Nope, för lågt.",
+                "Trevligt att du gissar men det var för lågt."
                 };
 
             int difference = CheckDifference(guess, secret);
@@ -179,11 +167,11 @@ namespace NumbersGame
             {
                 if(difference == 1)
                 {
-                    Console.WriteLine("Vääääääääldigt nära. Försök igen!");
+                    Console.WriteLine("Vääääääääldigt nära!");
                 }
                 else if(difference > 1 && difference <=3)
                 {
-                    Console.WriteLine("Nära, men lite för högt! Försök igen.");
+                    Console.WriteLine("Nära, men lite för högt!");
                 }
                 else
                 {
@@ -198,11 +186,11 @@ namespace NumbersGame
             {
                 if(difference == 1)
                 {
-                    Console.WriteLine("Vääääääääldigt nära. Försök igen!");
+                    Console.WriteLine("Vääääääääldigt nära!");
                 }
                 else if (difference > 1 && difference <= 3)
                 {
-                    Console.WriteLine("Nära, men lite för lågt! Försök igen.");
+                    Console.WriteLine("Nära, men lite för lågt!");
                 }
                 else
                 {
